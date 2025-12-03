@@ -341,6 +341,59 @@ Para mantener PMGI constante, **CI debe ser parte del sistema giratorio**, no es
 - Rodamientos o rueditas en el perímetro (opcional)
 - Mínima transferencia de torque al aceite
 
+**Deflectores Anti-Rotación (Baffles):**
+
+Para evitar que el aceite gire dentro de la bandeja y arrastre el recipiente, se instalan deflectores radiales internos:
+
+```
+        Vista superior de CI (bandeja con baffles)
+
+                    Entrada CS→CI
+                         ↓
+              ┌──────────○──────────┐
+             /    ║            ║    \
+            /     ║    ════    ║     \
+           │      ║    ════    ║      │
+  Entrada →○ ═════╬════════════╬═════ ○← Entrada
+           │      ║    ════    ║      │
+            \     ║    ════    ║     /
+             \    ║            ║    /
+              └──────────○──────────┘
+                         ↑
+                   Salida CI→CS
+                   (zona central)
+
+   ════ = Baffles radiales (permiten flujo al centro)
+   ○ = Zonas de entrada/salida (libres de baffles)
+```
+
+**Características de los baffles:**
+
+| Aspecto | Especificación |
+|---------|----------------|
+| Orientación | Radial (del borde hacia el centro) |
+| Cantidad | 4-8 deflectores distribuidos |
+| Altura | Parcial (70-80% de la altura del aceite) |
+| Material | Mismo que la bandeja |
+
+**Función:**
+- Bloquean flujo tangencial (rotación del aceite)
+- Permiten flujo radial (hacia el centro)
+- Estabilizan la bandeja contra arrastre
+- Reducen vibraciones y "sloshing"
+
+**IMPORTANTE - Zonas libres de baffles:**
+
+Los baffles NO deben ubicarse en:
+1. **Zonas de entrada (4 puntos cerca de PA):** Deben tener camino libre y uniforme para recibir el flujo de las 4 CS
+2. **Zona central de salida:** Debe permitir flujo uniforme desde todas las direcciones hacia la salida CI→CS
+3. **Corredores radiales:** Entre cada entrada y el centro debe haber paso libre
+
+**Distribución recomendada:**
+- 4-8 baffles posicionados ENTRE las zonas de entrada
+- Nunca alineados con las toberas de entrada/salida
+- Dejar corredores radiales libres hacia el centro
+
 ---
 
 ### Opción 4: CI Fija al Suelo (NO RECOMENDADA)

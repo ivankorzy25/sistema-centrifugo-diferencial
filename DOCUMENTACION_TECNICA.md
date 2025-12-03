@@ -394,6 +394,62 @@ Los baffles NO deben ubicarse en:
 - Nunca alineados con las toberas de entrada/salida
 - Dejar corredores radiales libres hacia el centro
 
+**Sistema de Estabilización Activa (Ruedas Motorizadas):**
+
+Para garantizar máxima estabilidad de CI, se implementa un sistema de control activo con ruedas eléctricas motorizadas.
+
+```
+    Estructura giratoria (ω)
+           │
+    ┌──────┴──────┐
+    │  ⚡🛞  ⚡🛞  │ ← Ruedas motorizadas (3-4 unidades)
+    │  ⚡🛞  ⚡🛞  │   controladas electrónicamente
+    ├─────────────┤
+    ║   Bandeja   ║ ← CI (flotante, estabilizada)
+    ║     CI      ║
+    ╚═════════════╝
+```
+
+**Componentes del sistema:**
+
+| Componente | Función | Especificación |
+|------------|---------|----------------|
+| Ruedas motorizadas | Aplican torque correctivo | 3-4 unidades distribuidas |
+| Giroscopio MEMS | Detecta rotación de CI | MPU6050 o similar |
+| Microcontrolador | Control PID | ESP32/Arduino |
+| Slip ring | Alimentación eléctrica | Para sistema rotativo |
+
+**Funcionamiento:**
+- Sensor detecta cualquier rotación de CI
+- Controlador calcula corrección necesaria
+- Motores aplican torque para mantener CI estable
+- Loop de control continuo (milisegundos)
+
+**Consumo energético:**
+
+| Estado | Consumo |
+|--------|---------|
+| Régimen estable | < 50-100 W |
+| Corrección activa | 200-500 W (momentáneo) |
+| Promedio | **< 1% de potencia extraída** |
+
+**Ventajas:**
+- Control preciso de ω_CI (puede ser exactamente 0)
+- Respuesta rápida a perturbaciones
+- Telemetría en tiempo real
+- Redundancia (múltiples ruedas)
+- Adaptable a diferentes condiciones de operación
+
+**Análisis de fuerzas a contrarrestar:**
+
+| Fuente de perturbación | Torque | Fuerza equivalente |
+|------------------------|--------|-------------------|
+| Fricción rodamientos | ~82 N·m | ~55 N |
+| Desbalance flujo (10%) | ~480 N·m | ~320 N |
+| Frenado toberas inversas | ~19,000 N·m | (a favor) |
+
+El sistema de toberas inversas aporta el frenado principal (~19,000 N·m). Las ruedas motorizadas solo hacen corrección fina, por eso el consumo es bajo.
+
 ---
 
 ### Opción 4: CI Fija al Suelo (NO RECOMENDADA)
@@ -572,6 +628,46 @@ $$P_{total} = \frac{1}{2} \omega^2 (r_{PA}^2 - r_{int}^2) \times \rho \times Q$$
 | 200 | 20.94 | 980 | 416 |
 
 **La potencia escala con ω³**
+
+### Potencia por CS Individual
+
+Cada una de las 4 CS puede tener su propia turbina con eje vertical hacia arriba.
+
+**Cálculo por CS (a 100 RPM):**
+
+| Parámetro | Total | Por CS (÷4) |
+|-----------|-------|-------------|
+| Caudal Q | 0.96 m³/s | 0.24 m³/s |
+| Flujo másico ṁ | 835 kg/s | 209 kg/s |
+| ΔP | 128,000 Pa | 128,000 Pa |
+| P_hidráulica | 123 kW | **31 kW** |
+| P_extraíble (45%) | 55 kW | **14 kW** |
+| P_neta (η=85%) | 47 kW | **12 kW** |
+
+**Potencia neta por CS según RPM:**
+
+| RPM | P_neta/CS | Total (×4) |
+|-----|-----------|------------|
+| 50 | 1.4 kW | 5.6 kW |
+| 100 | **12 kW** | **48 kW** |
+| 150 | 39 kW | 156 kW |
+| 200 | 94 kW | 376 kW |
+
+**Turbina recomendada por CS:**
+
+| Aspecto | Especificación |
+|---------|----------------|
+| Tipo | Turbina radial o Pelton pequeña |
+| Potencia nominal | 12-15 kW (a 100 RPM) |
+| Eje | Vertical (hacia arriba) |
+| Eficiencia esperada | 80-90% |
+| Ubicación | En CS, cerca de PA |
+
+**Ventajas de turbinas individuales por CS:**
+- Redundancia (si falla una, las otras funcionan)
+- Mantenimiento independiente
+- Balanceo de carga
+- Flexibilidad de diseño
 
 ### Precámara de Extracción
 

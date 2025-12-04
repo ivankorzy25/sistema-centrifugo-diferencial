@@ -1,0 +1,202 @@
+═══════════════════════════════════════════════════════════════════════════
+         ANÁLISIS TRIBOLÓGICO - SISTEMA CENTRÍFUGO DIFERENCIAL
+═══════════════════════════════════════════════════════════════════════════
+
+ACEITE: ISO VG 100 (Hidráulico)
+├── Densidad: 870 kg/m³
+├── Viscosidad dinámica @ 40°C: 0.1 Pa·s
+├── Viscosidad cinemática @ 40°C: 115 cSt
+└── Índice de viscosidad: 100
+
+───────────────────────────────────────────────────────────────────────────
+1. VISCOSIDAD VS TEMPERATURA
+───────────────────────────────────────────────────────────────────────────
+
+T (°C)  │  μ (Pa·s)  │  Relativo  │  Efecto en Q
+────────┼────────────┼────────────┼──────────────────
+  20    │   0.361    │   3.61×    │  -16.5% (muy viscoso)
+  40    │   0.100    │   1.00×    │  Referencia ✓
+  50    │   0.059    │   0.59×    │  +6.5% (óptimo)
+  60    │   0.038    │   0.38×    │  +12.1% (límite)
+  80    │   0.019    │   0.19×    │  +19.8% (degradación)
+
+Ecuación práctica: μ(T) = 0.1 × exp[-0.035×(T-40)]
+
+───────────────────────────────────────────────────────────────────────────
+2. ESFUERZO CORTANTE EN PAREDES
+───────────────────────────────────────────────────────────────────────────
+
+Caso                              │  Δv (m/s)  │  τ (Pa)  │  Ubicación
+──────────────────────────────────┼────────────┼──────────┼──────────────
+Flujo 20 m/s sobre pared quieta   │     20     │   500    │  CI entrada
+Flujo 20 m/s sobre pared a 20 m/s │      0     │   ~5     │  CS régimen
+Flujo 0 m/s sobre pared a 2 m/s   │      2     │    50    │  CI arrastre
+
+⚠️ Mayor arrastre en CI (pared quieta vs fluido con inercia)
+
+───────────────────────────────────────────────────────────────────────────
+3. PÉRDIDAS POR FRICCIÓN EN CANALES
+───────────────────────────────────────────────────────────────────────────
+
+Sección           │   Re      │ Régimen    │  f      │  ΔP (Pa)  │  ΔP (bar)
+──────────────────┼───────────┼────────────┼─────────┼───────────┼───────────
+Canal CS          │   5,570   │ Turbulento │ 0.0365  │    176    │  0.0018
+Tobera CS→CI      │ 177,480   │ Turbulento │ 0.0142  │  42,551   │  0.426
+CI (radial)       │   4,350   │ Turbulento │ 0.0395  │    275    │  0.0028
+Tobera CI→CS      │ 177,480   │ Turbulento │ 0.0142  │  42,551   │  0.426
+──────────────────┴───────────┴────────────┴─────────┼───────────┼───────────
+TOTAL                                                 │  85,553   │  0.856
+                                                      └───────────┴───────────
+Presión disponible (centrífuga @ 100 RPM): 128,000 Pa (1.28 bar)
+Margen de seguridad: 42,447 Pa (33%) ✓
+
+───────────────────────────────────────────────────────────────────────────
+4. POTENCIA DISIPADA POR FRICCIÓN
+───────────────────────────────────────────────────────────────────────────
+
+Fuente de Fricción              │  Potencia (W)  │  Potencia (kW)  │  %
+────────────────────────────────┼────────────────┼─────────────────┼──────
+Paredes CI                      │      300       │      0.30       │ 0.26%
+Baffles CI                      │       30       │      0.03       │ 0.03%
+Paredes CS                      │       20       │      0.02       │ 0.02%
+Toberas (viscosa)               │      480       │      0.48       │ 0.41%
+Disipación interna fluido       │    2,458       │      2.46       │ 2.11%
+Rodamientos + control           │      220       │      0.22       │ 0.19%
+────────────────────────────────┼────────────────┼─────────────────┼──────
+TOTAL FRICCIÓN VISCOSA          │    3,508       │      3.51       │ 3.00%
+
+Pérdidas de carga (presión)     │   82,200       │     82.20       │ 70.4%
+Pérdidas en turbinas (15%)      │   20,600       │     20.60       │ 17.6%
+────────────────────────────────┼────────────────┼─────────────────┼──────
+TOTAL SISTEMA                   │  106,308       │    106.31       │ 91.0%
+
+Potencia generada @ 100 RPM: 116.8 kW
+Potencia neta: 10.5 kW
+Eficiencia actual: 9.0%
+
+⚠️ La mayor pérdida NO es fricción viscosa, sino pérdida de carga en toberas
+
+───────────────────────────────────────────────────────────────────────────
+5. CALENTAMIENTO DEL ACEITE
+───────────────────────────────────────────────────────────────────────────
+
+Calor generado: 4.11 kW
+Masa de aceite: 1,740 kg
+Calor específico: 2,000 J/(kg·K)
+
+Elevación de temperatura:
+├── Por ciclo (2.08 s): 0.0025°C
+├── Por minuto: 0.072°C
+└── Por hora: 4.3°C
+
+Temperatura de equilibrio (sin enfriamiento): 47°C ✓
+
+Enfriamiento recomendado:
+├── Tipo: Intercambiador agua-aceite
+├── Capacidad: 5-8 kW
+├── Flujo bypass: 15% del total
+└── Temperatura objetivo: 50-55°C
+
+───────────────────────────────────────────────────────────────────────────
+6. EFECTO DE VISCOSIDAD EN CAUDAL
+───────────────────────────────────────────────────────────────────────────
+
+Régimen: TURBULENTO → Q ∝ μ^(-0.125)
+
+Si μ aumenta 50%:  Q disminuye 5.2%
+Si μ disminuye 50%: Q aumenta 9.1%
+
+Temperatura │  μ/μ₄₀  │  Q/Q₄₀  │  P/P₄₀  │  Rendimiento
+────────────┼─────────┼─────────┼─────────┼───────────────────────
+    20°C    │  3.61   │  0.835  │  0.835  │  Muy viscoso ✗
+    40°C    │  1.00   │  1.000  │  1.000  │  Referencia
+    50°C    │  0.59   │  1.065  │  1.065  │  Óptimo ✓
+    55°C    │  0.48   │  1.091  │  1.091  │  Máximo ✓✓
+    60°C    │  0.38   │  1.121  │  1.121  │  Límite térmico
+    80°C    │  0.19   │  1.198  │  1.198  │  Degradación ✗
+
+TEMPERATURA ÓPTIMA: 50-55°C (+9% rendimiento vs 40°C)
+
+───────────────────────────────────────────────────────────────────────────
+7. LUBRICACIÓN DE RODAMIENTOS
+───────────────────────────────────────────────────────────────────────────
+
+Rodamientos SKF 6210 (4 unidades)
+├── Carga total: 14,274 N (1,455 kg)
+├── Carga por rodamiento: 2,379-7,137 N
+├── Factor de seguridad: 2.24-6.73 ✓
+└── Lubricante: Grasa NLGI 2 EP
+
+Fricción:
+├── Coeficiente μ: 0.0018
+├── Torque total: 1.8 N·m
+├── Potencia (Δω=10.47 rad/s): 18.8 W
+└── Sistema control activo: 200 W
+
+TOTAL: 220 W (0.19% de potencia generada) → Despreciable ✓
+
+───────────────────────────────────────────────────────────────────────────
+8. OPTIMIZACIONES RECOMENDADAS
+───────────────────────────────────────────────────────────────────────────
+
+OPTIMIZACIÓN                    │  AHORRO     │  INVERSIÓN  │  PRIORIDAD
+────────────────────────────────┼─────────────┼─────────────┼───────────
+Toberas tipo Venturi            │  44.3 kW    │  Media      │  ALTA ★★★
+Aumentar diámetro toberas +30%  │  34.7 kW    │  Baja       │  ALTA ★★★
+Cambiar a aceite VG 68          │   1.1 kW    │  Baja       │  MEDIA ★★
+Operar a 50-55°C                │   7.6 kW    │  Media      │  ALTA ★★★
+Recubrimiento superhidrofóbico  │   0.2 kW    │  Alta       │  BAJA ★
+Pulido fino CI (Ra<0.4μm)       │   0.1 kW    │  Baja       │  BAJA ★
+
+───────────────────────────────────────────────────────────────────────────
+9. COMPARATIVA: ACTUAL vs OPTIMIZADO
+───────────────────────────────────────────────────────────────────────────
+
+Parámetro                │  Actual      │  Optimizado    │  Mejora
+─────────────────────────┼──────────────┼────────────────┼──────────
+Aceite                   │  VG 100      │  VG 68 Sint.   │  -32% μ
+Temperatura              │    40°C      │    50-55°C     │  +6.5% Q
+Fricción viscosa         │  3.51 kW     │    2.39 kW     │  -32%
+Pérdidas toberas         │ 85.10 kW     │   40.80 kW     │  -52%
+Pérdidas totales         │106.31 kW     │   61.80 kW     │  -42%
+Potencia neta            │ 10.50 kW     │   55.00 kW     │  +424%
+EFICIENCIA               │   9.0%       │    47.1%       │  +423%
+
+═══════════════════════════════════════════════════════════════════════════
+                            CONCLUSIONES
+═══════════════════════════════════════════════════════════════════════════
+
+✓ Las pérdidas por FRICCIÓN VISCOSA son BAJAS: 3.0% de la potencia generada
+
+✓ La mayor pérdida está en las TOBERAS (pérdida de carga): 70.4%
+
+✓ Con aceite optimizado (VG 68) y temperatura controlada (50-55°C):
+  → Fricción viscosa disminuye a 2.39 kW (2.0%)
+  → Caudal aumenta 6.5%
+  → Potencia generada aumenta 6.5%
+
+✓ Con toberas rediseñadas (Venturi, +30% diámetro):
+  → Pérdidas de carga bajan de 85.1 a 40.8 kW (-52%)
+  → Eficiencia sube de 9% a 47% (+423%)
+
+⚠️ Sistema de enfriamiento necesario para mantener 50-55°C
+
+═══════════════════════════════════════════════════════════════════════════
+                        ACEITE RECOMENDADO
+═══════════════════════════════════════════════════════════════════════════
+
+Tipo: Aceite hidráulico SINTÉTICO
+Grado ISO: VG 68
+Viscosidad @ 40°C: 68 cSt
+Viscosidad @ 50°C: 42 cSt
+Índice de viscosidad: ≥ 120
+Temperatura de trabajo: 50-55°C
+Temperatura máxima: 70°C
+
+Marcas recomendadas:
+  • Shell Tellus S2 VX 68
+  • Mobil DTE 25
+  • Castrol Hyspin AWS 68
+  • Fuchs Renolin B-HVI 68
+
+═══════════════════════════════════════════════════════════════════════════

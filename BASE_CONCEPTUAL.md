@@ -197,10 +197,52 @@ CI es una bandeja independiente que:
 - Está **dentro** del sistema giratorio (no anclada al suelo)
 - Monta sobre rodamientos de baja fricción
 - Puede girar libremente respecto a la estructura
+- **INCLINADA HACIA EL CENTRO** (dato fundamental)
 - Se mantiene a ω_CI ≈ 0 mediante:
   - Toberas tangenciales inversas (frenado principal)
   - Baffles radiales (evitan rotación del fluido)
   - Ruedas motorizadas con control activo (corrección fina)
+
+### Inclinación de CI - Principio Fundamental
+
+```
+Vista en corte radial de CI (inclinada):
+
+    Borde (PA)                                    Centro (eje)
+    r = 2m                                        r = 1m
+       │                                             │
+       │  ╲                                          │
+       │    ╲   Aceite fluye por GRAVEDAD            │
+       │      ╲  (no hay centrífuga, ω_CI ≈ 0)       │
+       │        ╲                                    │
+       │          ╲  ────────────────────►           │
+       │            ╲     dirección del flujo        │
+       │              ╲                              │
+       │                ╲                            │
+       │                  ╲  ← Inclinación ~2-5°     │
+       └────────────────────╲────────────────────────┘
+                              Punto más bajo
+                              (salida a CS)
+```
+
+**Por qué funciona:**
+- CI está a ω_CI ≈ 0, por lo tanto NO hay fuerza centrífuga significativa
+- La única fuerza que actúa sobre el aceite en CI es la GRAVEDAD
+- Con CI inclinada hacia el centro, la gravedad lleva el aceite al centro
+- El aceite "cae" naturalmente hacia la salida (zona de succión a CS)
+
+**Cálculo de la pendiente necesaria:**
+
+Para superar la viscosidad del aceite y mantener flujo:
+- Ángulo mínimo: ~1-2° (flujo lento)
+- Ángulo óptimo: ~3-5° (flujo fluido)
+- Ángulo máximo: ~10° (límite estructural)
+
+Con inclinación de 3° y radio de 1m:
+- Desnivel: Δh = 1m × tan(3°) = 5.2 cm
+- Presión hidrostática: ΔP = ρgh = 870 × 9.8 × 0.052 = 443 Pa
+
+Esta presión es suficiente para mantener el flujo radial en CI.
 
 ```
 Vista superior de CI:
